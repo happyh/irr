@@ -14,15 +14,15 @@
  <script type="text/javascript" src="./jquery-1.11.1.min.js"> </script>
   <script>
     function CalcIRR(){
-		var shijidaikuanjinge = $("#daikuan").val()-$("#shouxufei").val()
-		var yuelilv = $("#lilv").val()/12/100
-		var yueqishu = $("#qishu").val()
-		var meiqi = yuelilv==0?($("#daikuan").val()/yueqishu):$("#daikuan").val()*(yuelilv*Math.pow((1+yuelilv),yueqishu))/(Math.pow((1+yuelilv),yueqishu)-1)
-		var cash =new Array()
-		cash.push(-shijidaikuanjinge);
-		for(i=0;i<yueqishu;i++){
-			cash.push(meiqi)
-		}
+	var shijidaikuanjinge = $("#daikuan").val()-$("#shouxufei").val()
+	var yuelilv = $("#lilv").val()/12/100
+	var yueqishu = $("#qishu").val()
+	var meiqi = yuelilv==0?($("#daikuan").val()/yueqishu):$("#daikuan").val()*(yuelilv*Math.pow((1+yuelilv),yueqishu))/(Math.pow((1+yuelilv),yueqishu)-1)
+	var cash =new Array()
+	cash.push(-shijidaikuanjinge);
+	for(i=0;i<yueqishu;i++){
+		cash.push(meiqi)
+	}
         var cash1 = new Array(-106600,9996,9996,9996,9996,9996,9996,9996,9996,9996,9996,9996,9996)
         //var cash = new Array(100,-110)
         var result = IRR(cash,0.01)*12
