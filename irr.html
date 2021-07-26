@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+<title>IRR</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+ <script type="text/javascript" src="./irr.js"> </script>
+ <script type="text/javascript" src="./jquery-1.11.1.min.js"> </script>
+  <script>
+    function CalcIRR(){
+		var shijidaikuanjinge = $("#daikuan").val()-$("#shouxufei").val()
+		var yuelilv = $("#lilv").val()/12/100
+		var yueqishu = $("#qishu").val()
+		var meiqi = yuelilv==0?($("#daikuan").val()/yueqishu):$("#daikuan").val()*(yuelilv*Math.pow((1+yuelilv),yueqishu))/(Math.pow((1+yuelilv),yueqishu)-1)
+		var cash =new Array()
+		cash.push(-shijidaikuanjinge);
+		for(i=0;i<yueqishu;i++){
+			cash.push(meiqi)
+		}
+        var cash1 = new Array(-106600,9996,9996,9996,9996,9996,9996,9996,9996,9996,9996,9996,9996)
+        //var cash = new Array(100,-110)
+        var result = IRR(cash,0.01)*12
+		$("#result_irr").val(result)
+		$("#result_meiqi").val(meiqi)
+    }
+ </script>
+</head>
+<body><br/>
+<form name="simpleintform">
+    <table cellspacing="0" cellpadding="5" border="1" width="449">
+        <tbody>
+            <tr>
+                <td width="122">贷款：</td>
+                <td width="287">
+				<input id="daikuan" size="10" type="text" style="border: 2px solid #FF0000"  value="109800"/>元</td>
+            </tr>
+            <tr>
+                <td width="122">期数：</td>
+                <td width="287">
+				<input id="qishu" size="6" maxlength="5" type="text" style="border: 2px solid #FF0000" value="12"/>月</td>
+            </tr>
+            <tr>
+                <td width="122">贷款年利率：</td>
+                <td width="287">
+				<input id="lilv" size="6" maxlength="5" type="text" style="border: 2px solid #FF0000" value="0"/>%</td>
+            </tr>
+            <tr>
+                <td width="122">手续费：</td>
+                <td width="287">
+				<input id="shouxufei" size="6" type="text" style="border: 2px solid #FF0000" value="3200"/>元</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input name="btncalc" value=" 计算 " onClick="javascript:CalcIRR();" type="button" /></td>
+            </tr>
+            <tr>
+                <td width="122">实际IRR:</td>
+                <td align="left" width="287"><font face=" type=&quot;hidden&quot;"><input id="result_irr" size="10" readonly="" type="text" /></font></td>
+            </tr>
+            <tr>
+                <td width="122">每期还款:</td>
+                <td align="left" width="287"><font face=" type=&quot;hidden&quot;"><input id="result_meiqi" size="10" readonly="" type="text" /></font></td>
+            </tr>
+        </tbody>
+    </table>
+</form>    
+</body>
+</html>
